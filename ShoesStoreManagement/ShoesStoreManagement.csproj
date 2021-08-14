@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1408B80F-996D-47A1-9DBD-9E8FCA42CABF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ShoesStoreManagement</RootNamespace>
+    <AssemblyName>ShoesStoreManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\BLL_BaoCao.cs" />
+    <Compile Include="BLL\BLL_DuongDan.cs" />
+    <Compile Include="BLL\BLL_Giay.cs" />
+    <Compile Include="BLL\BLL_HoaDon.cs" />
+    <Compile Include="BLL\BLL_Login.cs" />
+    <Compile Include="BLL\BLL_KhachHang.cs" />
+    <Compile Include="BLL\BLL_NhanVien.cs" />
+    <Compile Include="BLL\BLL_TaiKhoan.cs" />
+    <Compile Include="BLL\BLL_ThongKe.cs" />
+    <Compile Include="DTO\Account.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\AccountType.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Bill.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Customer.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DetailedBill.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DetailedSho.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\DTO_Account.cs" />
+    <Compile Include="DTO\DTO_BaoCaoView.cs" />
+    <Compile Include="DTO\DTO_Bill.cs" />
+    <Compile Include="DTO\DTO_CBBLoaiGiay.cs" />
+    <Compile Include="DTO\DTO_CBBMaGiay.cs" />
+    <Compile Include="DTO\DTO_ChangePasswordOfAccount.cs" />
+    <Compile Include="DTO\DTO_DangKyTaiKhoan.cs" />
+    <Compile Include="DTO\DTO_DetailBill.cs" />
+    <Compile Include="DTO\DTO_DetailBillView.cs" />
+    <Compile Include="DTO\DTO_GiayXuat.cs" />
+    <Compile Include="DTO\DTO_HienHanh.cs" />
+    <Compile Include="DTO\DTO_KhachHang.cs" />
+    <Compile Include="DTO\DTO_KichThuoc.cs" />
+    <Compile Include="DTO\DTO_LoaiGiayBan.cs" />
+    <Compile Include="DTO\DTO_NhanVien.cs" />
+    <Compile Include="DTO\DTO_Shoes.cs" />
+    <Compile Include="DTO\DTO_ShowDGV_NhanVien.cs" />
+    <Compile Include="DTO\Sho.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\shoeStore.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shoeStore.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\shoeStore.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\shoeStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>shoeStore.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\ShoesType.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Staff.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\StaffState.cs">
+      <DependentUpon>shoeStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormAddKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormAddKhachHang.Designer.cs">
+      <DependentUpon>FormAddKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Customer\FormUpdateKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Customer\FormUpdateKhachHang.Designer.cs">
+      <DependentUpon>FormUpdateKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormThongKe.Designer.cs">
+      <DependentUpon>FormThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormTaiKhoan.Designer.cs">
+      <DependentUpon>FormTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormKhachHang.Designer.cs">
+      <DependentUpon>FormKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormNhanVien.Designer.cs">
+      <DependentUpon>FormNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\FormSanPham.Designer.cs">
+      <DependentUpon>FormSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Login\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Login\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\Time.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_Mainform\Time.Designer.cs">
+      <DependentUpon>Time.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormThayDoiThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormThayDoiThongTin.Designer.cs">
+      <DependentUpon>FormThayDoiThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormXemTatCaNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormXemTatCaNhanVien.Designer.cs">
+      <DependentUpon>FormXemTatCaNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormXemThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_NhanVien\FormXemThongTin.Designer.cs">
+      <DependentUpon>FormXemThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormAddSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormAddSanPham.Designer.cs">
+      <DependentUpon>FormAddSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormCapNhat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormCapNhat.Designer.cs">
+      <DependentUpon>FormCapNhat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormHienThiSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormHienThiSanPham.Designer.cs">
+      <DependentUpon>FormHienThiSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormHoaDon.Designer.cs">
+      <DependentUpon>FormHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormThemSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormThemSanPham.Designer.cs">
+      <DependentUpon>FormThemSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormThongTin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\FormThongTin.Designer.cs">
+      <DependentUpon>FormThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\ucSP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UI_SanPham\ucSP.Designer.cs">
+      <DependentUpon>ucSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_TaiKhoan\FormDangKyTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_TaiKhoan\FormDangKyTaiKhoan.Designer.cs">
+      <DependentUpon>FormDangKyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_TaiKhoan\FormDoiMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_TaiKhoan\FormDoiMatKhau.Designer.cs">
+      <DependentUpon>FormDoiMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThongBao\FormThongBao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_ThongBao\FormThongBao.Designer.cs">
+      <DependentUpon>FormThongBao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThongKe\FormBieuDo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_ThongKe\FormBieuDo.Designer.cs">
+      <DependentUpon>FormBieuDo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI_ThongKe\FormChiTietHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI_ThongKe\FormChiTietHoaDon.Designer.cs">
+      <DependentUpon>FormChiTietHoaDon.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormAddKhachHang.resx">
+      <DependentUpon>FormAddKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Customer\FormUpdateKhachHang.resx">
+      <DependentUpon>FormUpdateKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\FormThongKe.resx">
+      <DependentUpon>FormThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\FormTaiKhoan.resx">
+      <DependentUpon>FormTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\FormKhachHang.resx">
+      <DependentUpon>FormKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\FormNhanVien.resx">
+      <DependentUpon>FormNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\FormSanPham.resx">
+      <DependentUpon>FormSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Login\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_Mainform\Time.resx">
+      <DependentUpon>Time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_NhanVien\FormThayDoiThongTin.resx">
+      <DependentUpon>FormThayDoiThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_NhanVien\FormXemTatCaNhanVien.resx">
+      <DependentUpon>FormXemTatCaNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_NhanVien\FormXemThongTin.resx">
+      <DependentUpon>FormXemThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormAddSanPham.resx">
+      <DependentUpon>FormAddSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormCapNhat.resx">
+      <DependentUpon>FormCapNhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormHienThiSanPham.resx">
+      <DependentUpon>FormHienThiSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormHoaDon.resx">
+      <DependentUpon>FormHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormThemSanPham.resx">
+      <DependentUpon>FormThemSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\FormThongTin.resx">
+      <DependentUpon>FormThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_SanPham\ucSP.resx">
+      <DependentUpon>ucSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_TaiKhoan\FormDangKyTaiKhoan.resx">
+      <DependentUpon>FormDangKyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_TaiKhoan\FormDoiMatKhau.resx">
+      <DependentUpon>FormDoiMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_ThongBao\FormThongBao.resx">
+      <DependentUpon>FormThongBao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_ThongKe\FormBieuDo.resx">
+      <DependentUpon>FormBieuDo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UI_ThongKe\FormChiTietHoaDon.resx">
+      <DependentUpon>FormChiTietHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="DTO\shoeStore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>shoeStore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="DTO\shoeStore.edmx.diagram">
+      <DependentUpon>shoeStore.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sneakers.png" />
+    <None Include="Resources\moderator-1281.png" />
+    <None Include="Resources\manager-1281.png" />
+    <None Include="Resources\River.png" />
+    <None Include="Resources\wp2856244-hd-gif-wallpapers.gif" />
+    <None Include="Resources\Tick.png" />
+    <None Include="Resources\BigCity.png" />
+    <None Include="Resources\AddImage.png" />
+    <None Include="Resources\Add2.png" />
+    <None Include="Resources\dolphin.gif" />
+    <None Include="Resources\BigCity2.jpeg" />
+    <Content Include="DTO\shoeStore.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shoeStore.edmx</DependentUpon>
+      <LastGenOutput>shoeStore.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DTO\shoeStore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>shoeStore.edmx</DependentUpon>
+      <LastGenOutput>shoeStore.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\bill.png" />
+    <None Include="Resources\increase.png" />
+    <Content Include="Resources\Logo_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Moving_gif.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open.png" />
+    <None Include="Resources\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

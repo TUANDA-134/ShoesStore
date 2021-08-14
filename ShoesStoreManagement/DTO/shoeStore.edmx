@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShoesStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="accountUsername" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountTypeId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="accountTypeId" />
+          </Key>
+          <Property Name="accountTypeId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="accountTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="billId" />
+          </Key>
+          <Property Name="billId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="customerId" Type="varchar" MaxLength="10" />
+          <Property Name="staffId" Type="varchar" MaxLength="10" />
+          <Property Name="billEstablishedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="25" />
+          <Property Name="customerGender" Type="bit" />
+          <Property Name="customerBirthday" Type="date" />
+          <Property Name="customerTelephoneNumber" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DetailedBill">
+          <Key>
+            <PropertyRef Name="detailedBillId" />
+          </Key>
+          <Property Name="detailedBillId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="billId" Type="varchar" MaxLength="10" />
+          <Property Name="detailedShoesId" Type="varchar" MaxLength="50" />
+          <Property Name="shoesName" Type="varchar" MaxLength="15" />
+          <Property Name="shoesCost" Type="float" />
+          <Property Name="shoesOrderedAmount" Type="int" />
+        </EntityType>
+        <EntityType Name="DetailedShoes">
+          <Key>
+            <PropertyRef Name="detailedShoesId" />
+          </Key>
+          <Property Name="detailedShoesId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shoesId" Type="varchar" MaxLength="10" />
+          <Property Name="shoesColor" Type="varchar" MaxLength="10" />
+          <Property Name="shoesSize" Type="float" />
+          <Property Name="shoesQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Shoes">
+          <Key>
+            <PropertyRef Name="shoesId" />
+          </Key>
+          <Property Name="shoesId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="shoesName" Type="varchar" MaxLength="100" />
+          <Property Name="shoesDescription" Type="text" />
+          <Property Name="shoesCost" Type="float" />
+          <Property Name="shoesTypeId" Type="varchar" MaxLength="50" />
+          <Property Name="shoesBrand" Type="text" />
+        </EntityType>
+        <EntityType Name="ShoesType">
+          <Key>
+            <PropertyRef Name="shoesTypeId" />
+          </Key>
+          <Property Name="shoesTypeId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shoesType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="staffCMND" Type="varchar" MaxLength="20" />
+          <Property Name="staffGender" Type="bit" />
+          <Property Name="staffName" Type="varchar" MaxLength="25" />
+          <Property Name="staffTelephoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="staffAddress" Type="text" />
+          <Property Name="staffBirthday" Type="date" />
+          <Property Name="staffEmail" Type="text" />
+          <Property Name="staffRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffStateId" Type="int" />
+          <Property Name="staffStartDate" Type="date" />
+          <Property Name="staffEndDate" Type="date" />
+          <Property Name="accountId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StaffState">
+          <Key>
+            <PropertyRef Name="staffStateId" />
+          </Key>
+          <Property Name="staffStateId" Type="int" Nullable="false" />
+          <Property Name="staffState" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Account_accountTypeId">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="accountTypeId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="accountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_customerId">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedBill_billId">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="DetailedBill" Type="Self.DetailedBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="billId" />
+            </Principal>
+            <Dependent Role="DetailedBill">
+              <PropertyRef Name="billId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedBill_detailedShoes">
+          <End Role="DetailedShoes" Type="Self.DetailedShoes" Multiplicity="0..1" />
+          <End Role="DetailedBill" Type="Self.DetailedBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailedShoes">
+              <PropertyRef Name="detailedShoesId" />
+            </Principal>
+            <Dependent Role="DetailedBill">
+              <PropertyRef Name="detailedShoesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedShoes_Shoes">
+          <End Role="Shoes" Type="Self.Shoes" Multiplicity="0..1" />
+          <End Role="DetailedShoes" Type="Self.DetailedShoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="shoesId" />
+            </Principal>
+            <Dependent Role="DetailedShoes">
+              <PropertyRef Name="shoesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shoes_shoesTypeId">
+          <End Role="ShoesType" Type="Self.ShoesType" Multiplicity="0..1" />
+          <End Role="Shoes" Type="Self.Shoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoesType">
+              <PropertyRef Name="shoesTypeId" />
+            </Principal>
+            <Dependent Role="Shoes">
+              <PropertyRef Name="shoesTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_accountId">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_staffId">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_staffStateId">
+          <End Role="StaffState" Type="Self.StaffState" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffState">
+              <PropertyRef Name="staffStateId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="staffStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoesStoreModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailedBill" EntityType="Self.DetailedBill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailedShoes" EntityType="Self.DetailedShoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shoes" EntityType="Self.Shoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoesType" EntityType="Self.ShoesType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffState" EntityType="Self.StaffState" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_accountTypeId" Association="Self.FK_Account_accountTypeId">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_customerId" Association="Self.FK_Bill_customerId">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedBill_billId" Association="Self.FK_DetailedBill_billId">
+            <End Role="Bill" EntitySet="Bill" />
+            <End Role="DetailedBill" EntitySet="DetailedBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedBill_detailedShoes" Association="Self.FK_DetailedBill_detailedShoes">
+            <End Role="DetailedShoes" EntitySet="DetailedShoes" />
+            <End Role="DetailedBill" EntitySet="DetailedBill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedShoes_Shoes" Association="Self.FK_DetailedShoes_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="DetailedShoes" EntitySet="DetailedShoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shoes_shoesTypeId" Association="Self.FK_Shoes_shoesTypeId">
+            <End Role="ShoesType" EntitySet="ShoesType" />
+            <End Role="Shoes" EntitySet="Shoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_accountId" Association="Self.FK_Staff_accountId">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_staffId" Association="Self.FK_Staff_staffId">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Bill" EntitySet="Bill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_staffStateId" Association="Self.FK_Staff_staffStateId">
+            <End Role="StaffState" EntitySet="StaffState" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShoesStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="accountUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="accountPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="accountTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountType" Relationship="Self.FK_Account_accountTypeId" FromRole="Account" ToRole="AccountType" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_accountId" FromRole="Account" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="accountTypeId" />
+          </Key>
+          <Property Name="accountTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="accountTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_accountTypeId" FromRole="AccountType" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="billId" />
+          </Key>
+          <Property Name="billId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customerId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="staffId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="billEstablishedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Bill_customerId" FromRole="Bill" ToRole="Customer" />
+          <NavigationProperty Name="DetailedBills" Relationship="Self.FK_DetailedBill_billId" FromRole="Bill" ToRole="DetailedBill" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_staffId" FromRole="Bill" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="customerGender" Type="Boolean" />
+          <Property Name="customerBirthday" Type="DateTime" Precision="0" />
+          <Property Name="customerTelephoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_customerId" FromRole="Customer" ToRole="Bill" />
+        </EntityType>
+        <EntityType Name="DetailedBill">
+          <Key>
+            <PropertyRef Name="detailedBillId" />
+          </Key>
+          <Property Name="detailedBillId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="billId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="detailedShoesId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shoesName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="shoesCost" Type="Double" />
+          <Property Name="shoesOrderedAmount" Type="Int32" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_DetailedBill_billId" FromRole="DetailedBill" ToRole="Bill" />
+          <NavigationProperty Name="DetailedSho" Relationship="Self.FK_DetailedBill_detailedShoes" FromRole="DetailedBill" ToRole="DetailedShoes" />
+        </EntityType>
+        <EntityType Name="DetailedSho">
+          <Key>
+            <PropertyRef Name="detailedShoesId" />
+          </Key>
+          <Property Name="detailedShoesId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shoesId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="shoesColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="shoesSize" Type="Double" />
+          <Property Name="shoesQuantity" Type="Int32" />
+          <NavigationProperty Name="DetailedBills" Relationship="Self.FK_DetailedBill_detailedShoes" FromRole="DetailedShoes" ToRole="DetailedBill" />
+          <NavigationProperty Name="Sho" Relationship="Self.FK_DetailedShoes_Shoes" FromRole="DetailedShoes" ToRole="Shoes" />
+        </EntityType>
+        <EntityType Name="Sho">
+          <Key>
+            <PropertyRef Name="shoesId" />
+          </Key>
+          <Property Name="shoesId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shoesName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="shoesDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="shoesCost" Type="Double" />
+          <Property Name="shoesTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shoesBrand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetailedShoes" Relationship="Self.FK_DetailedShoes_Shoes" FromRole="Shoes" ToRole="DetailedShoes" />
+          <NavigationProperty Name="ShoesType" Relationship="Self.FK_Shoes_shoesTypeId" FromRole="Shoes" ToRole="ShoesType" />
+        </EntityType>
+        <EntityType Name="ShoesType">
+          <Key>
+            <PropertyRef Name="shoesTypeId" />
+          </Key>
+          <Property Name="shoesTypeId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shoesType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Shoes" Relationship="Self.FK_Shoes_shoesTypeId" FromRole="ShoesType" ToRole="Shoes" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="staffCMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="staffGender" Type="Boolean" />
+          <Property Name="staffName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="staffTelephoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="staffAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="staffBirthday" Type="DateTime" Precision="0" />
+          <Property Name="staffEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="staffRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="staffStateId" Type="Int32" />
+          <Property Name="staffStartDate" Type="DateTime" Precision="0" />
+          <Property Name="staffEndDate" Type="DateTime" Precision="0" />
+          <Property Name="accountId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Staff_accountId" FromRole="Staff" ToRole="Account" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_Staff_staffId" FromRole="Staff" ToRole="Bill" />
+          <NavigationProperty Name="StaffState" Relationship="Self.FK_Staff_staffStateId" FromRole="Staff" ToRole="StaffState" />
+        </EntityType>
+        <EntityType Name="StaffState">
+          <Key>
+            <PropertyRef Name="staffStateId" />
+          </Key>
+          <Property Name="staffStateId" Type="Int32" Nullable="false" />
+          <Property Name="staffState1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_staffStateId" FromRole="StaffState" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Account_accountTypeId">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="accountTypeId" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="accountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_accountId">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bill_customerId">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedBill_billId">
+          <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="DetailedBill" Type="Self.DetailedBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="billId" />
+            </Principal>
+            <Dependent Role="DetailedBill">
+              <PropertyRef Name="billId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_staffId">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Bill">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedBill_detailedShoes">
+          <End Role="DetailedShoes" Type="Self.DetailedSho" Multiplicity="0..1" />
+          <End Role="DetailedBill" Type="Self.DetailedBill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DetailedShoes">
+              <PropertyRef Name="detailedShoesId" />
+            </Principal>
+            <Dependent Role="DetailedBill">
+              <PropertyRef Name="detailedShoesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailedShoes_Shoes">
+          <End Role="Shoes" Type="Self.Sho" Multiplicity="0..1" />
+          <End Role="DetailedShoes" Type="Self.DetailedSho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="shoesId" />
+            </Principal>
+            <Dependent Role="DetailedShoes">
+              <PropertyRef Name="shoesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shoes_shoesTypeId">
+          <End Role="ShoesType" Type="Self.ShoesType" Multiplicity="0..1" />
+          <End Role="Shoes" Type="Self.Sho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShoesType">
+              <PropertyRef Name="shoesTypeId" />
+            </Principal>
+            <Dependent Role="Shoes">
+              <PropertyRef Name="shoesTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_staffStateId">
+          <End Role="StaffState" Type="Self.StaffState" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffState">
+              <PropertyRef Name="staffStateId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="staffStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoesStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountTypes" EntityType="Self.AccountType" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DetailedBills" EntityType="Self.DetailedBill" />
+          <EntitySet Name="DetailedShoes" EntityType="Self.DetailedSho" />
+          <EntitySet Name="Shoes" EntityType="Self.Sho" />
+          <EntitySet Name="ShoesTypes" EntityType="Self.ShoesType" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="StaffStates" EntityType="Self.StaffState" />
+          <AssociationSet Name="FK_Account_accountTypeId" Association="Self.FK_Account_accountTypeId">
+            <End Role="AccountType" EntitySet="AccountTypes" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_accountId" Association="Self.FK_Staff_accountId">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bill_customerId" Association="Self.FK_Bill_customerId">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedBill_billId" Association="Self.FK_DetailedBill_billId">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="DetailedBill" EntitySet="DetailedBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_staffId" Association="Self.FK_Staff_staffId">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Bill" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedBill_detailedShoes" Association="Self.FK_DetailedBill_detailedShoes">
+            <End Role="DetailedShoes" EntitySet="DetailedShoes" />
+            <End Role="DetailedBill" EntitySet="DetailedBills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailedShoes_Shoes" Association="Self.FK_DetailedShoes_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="DetailedShoes" EntitySet="DetailedShoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shoes_shoesTypeId" Association="Self.FK_Shoes_shoesTypeId">
+            <End Role="ShoesType" EntitySet="ShoesTypes" />
+            <End Role="Shoes" EntitySet="Shoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_staffStateId" Association="Self.FK_Staff_staffStateId">
+            <End Role="StaffState" EntitySet="StaffStates" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShoesStoreModelStoreContainer" CdmEntityContainer="ShoesStoreEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ShoesStoreModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="accountUsername" ColumnName="accountUsername" />
+                <ScalarProperty Name="accountPassword" ColumnName="accountPassword" />
+                <ScalarProperty Name="accountTypeId" ColumnName="accountTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTypes">
+            <EntityTypeMapping TypeName="ShoesStoreModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="accountTypeId" ColumnName="accountTypeId" />
+                <ScalarProperty Name="accountTypeName" ColumnName="accountTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="ShoesStoreModel.Bill">
+              <MappingFragment StoreEntitySet="Bill">
+                <ScalarProperty Name="billId" ColumnName="billId" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="billEstablishedDate" ColumnName="billEstablishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ShoesStoreModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerGender" ColumnName="customerGender" />
+                <ScalarProperty Name="customerBirthday" ColumnName="customerBirthday" />
+                <ScalarProperty Name="customerTelephoneNumber" ColumnName="customerTelephoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailedBills">
+            <EntityTypeMapping TypeName="ShoesStoreModel.DetailedBill">
+              <MappingFragment StoreEntitySet="DetailedBill">
+                <ScalarProperty Name="detailedBillId" ColumnName="detailedBillId" />
+                <ScalarProperty Name="billId" ColumnName="billId" />
+                <ScalarProperty Name="detailedShoesId" ColumnName="detailedShoesId" />
+                <ScalarProperty Name="shoesName" ColumnName="shoesName" />
+                <ScalarProperty Name="shoesCost" ColumnName="shoesCost" />
+                <ScalarProperty Name="shoesOrderedAmount" ColumnName="shoesOrderedAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailedShoes">
+            <EntityTypeMapping TypeName="ShoesStoreModel.DetailedSho">
+              <MappingFragment StoreEntitySet="DetailedShoes">
+                <ScalarProperty Name="detailedShoesId" ColumnName="detailedShoesId" />
+                <ScalarProperty Name="shoesId" ColumnName="shoesId" />
+                <ScalarProperty Name="shoesColor" ColumnName="shoesColor" />
+                <ScalarProperty Name="shoesSize" ColumnName="shoesSize" />
+                <ScalarProperty Name="shoesQuantity" ColumnName="shoesQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shoes">
+            <EntityTypeMapping TypeName="ShoesStoreModel.Sho">
+              <MappingFragment StoreEntitySet="Shoes">
+                <ScalarProperty Name="shoesId" ColumnName="shoesId" />
+                <ScalarProperty Name="shoesName" ColumnName="shoesName" />
+                <ScalarProperty Name="shoesDescription" ColumnName="shoesDescription" />
+                <ScalarProperty Name="shoesCost" ColumnName="shoesCost" />
+                <ScalarProperty Name="shoesTypeId" ColumnName="shoesTypeId" />
+                <ScalarProperty Name="shoesBrand" ColumnName="shoesBrand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoesTypes">
+            <EntityTypeMapping TypeName="ShoesStoreModel.ShoesType">
+              <MappingFragment StoreEntitySet="ShoesType">
+                <ScalarProperty Name="shoesTypeId" ColumnName="shoesTypeId" />
+                <ScalarProperty Name="shoesType1" ColumnName="shoesType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="ShoesStoreModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="staffCMND" ColumnName="staffCMND" />
+                <ScalarProperty Name="staffGender" ColumnName="staffGender" />
+                <ScalarProperty Name="staffName" ColumnName="staffName" />
+                <ScalarProperty Name="staffTelephoneNumber" ColumnName="staffTelephoneNumber" />
+                <ScalarProperty Name="staffAddress" ColumnName="staffAddress" />
+                <ScalarProperty Name="staffBirthday" ColumnName="staffBirthday" />
+                <ScalarProperty Name="staffEmail" ColumnName="staffEmail" />
+                <ScalarProperty Name="staffRole" ColumnName="staffRole" />
+                <ScalarProperty Name="staffStateId" ColumnName="staffStateId" />
+                <ScalarProperty Name="staffStartDate" ColumnName="staffStartDate" />
+                <ScalarProperty Name="staffEndDate" ColumnName="staffEndDate" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffStates">
+            <EntityTypeMapping TypeName="ShoesStoreModel.StaffState">
+              <MappingFragment StoreEntitySet="StaffState">
+                <ScalarProperty Name="staffStateId" ColumnName="staffStateId" />
+                <ScalarProperty Name="staffState1" ColumnName="staffState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
